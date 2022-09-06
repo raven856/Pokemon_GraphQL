@@ -1,25 +1,36 @@
-import logo from './logo.svg';
+import { ApolloClient, InMemoryCache, ApolloProvider, HttpLink, from, } from '@apollo/client';
+import {onError} from '@apollo/client/link/error';
+import Home from './components/pages/Home';
+import 'antd/dist/antd.css';
 import './App.css';
+const errorLink = onError(({ graphqlErrors, networkError}) => {
+  if(graphqlErrors){
+    graphqlErrors.map(({message, location, path})=> {
+      alert('Grapgql error ${message}');
+    });
+  }
+});
+
+const link = from([
+  errorLink,
+  new HttpLink({uri: "https://beta.pokeapi.co/graphql/v1beta"})
+
+])
+const client = new ApolloClient({
+  cache: new InMemoryCache(),
+  link: link,
+})
 
 function App() {
+  
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+      <ApolloProvider client={client}>
+      <div className='appcontainer'>
+        <Home/>
+      </div>
+      </ApolloProvider>
+  )
 }
 
 export default App;
