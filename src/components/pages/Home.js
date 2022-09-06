@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import {useQuery, useLazyQuery, gql} from '@apollo/client';
-import {GET_ALL, GET_BY_SPECIESID} from '../../GraphQL/Queries';
-import {Input, Button, Space, Form, Card, message, Spin, Alert, Modal, } from 'antd';
-import { InfoCircleOutlined } from '@ant-design/icons';
-
+import { useLazyQuery} from '@apollo/client';
+import { GET_BY_SPECIESID} from '../../GraphQL/Queries';
+import { Input, Button, Space, Form, Card, message, Spin, Modal, } from 'antd';
+import { GithubOutlined, InfoCircleTwoTone } from '@ant-design/icons'
 const Home = () => {
     const [value, setValue] = useState('');
     const [showCard, setShowCard] = useState(false);
@@ -14,6 +13,7 @@ const Home = () => {
     useEffect(()=>{
         getPokemonByPId({ variables: { id: Number(pokemonId) } });
     },[])
+
     useEffect(()=>{
         if(data) {
             let newP = {};
@@ -50,17 +50,20 @@ const Home = () => {
             setValue(event.target.value);
           }
     };
+
     const handleSubmit = () => { 
         if(value != ''){
-            if(Number(value) <= 890){
+            if (Number(value) <= 890) {
                 getPokemonByPId({ variables: { id: Number(value) } });
-            }else{
+                setPokemonId(Number(value));
+            } else {
                 message.warning('Too high');
             }
         }
-        setPokemonId(Number(value));
+        
         setValue('');
     };
+
     const handleRandom = () => {
         let rand = (Math.floor(Math.random() * 890) + 1);
         console.log(rand);
@@ -69,6 +72,7 @@ const Home = () => {
         
         setValue('');
     };
+
     const capitalize = (str) => {
         if(typeof str === 'string') {
             return str.replace(/^\w/, c => c.toUpperCase());
@@ -76,6 +80,7 @@ const Home = () => {
             return '';
         }
     };
+
     let cardStyle = { backgroundColor: 'PeachPuff', width: '300px', }, 
         graphqlStyle = { color: 'Green', fontWeight: 'bold', }, 
         reactStyle = { color: 'Red', fontWeight: 'bold', }, 
@@ -93,7 +98,7 @@ const Home = () => {
                 <p>I build this in two days with no tutorial.</p>
                 Technologies used: <a href='https://reactjs.org/' style={reactStyle}>ReactJS</a> | <a href='https://ant.design/' style={antdStyle}>AntD</a> | <a href='https://graphql.org/' style={graphqlStyle}>GraphQL</a>  
                 <br/>
-                <p>See my source code: <a href='' style={{fontWeight: 'bold'}}>Github</a></p>
+                <p>See my source code: <a href='https://github.com/raven856/Pokemon_GraphQL' style={{fontWeight: 'bold'}}>GitHub <GithubOutlined /> </a></p>
                 Data source:
                 <br/>
                 <a href='https://pokeapi.co/'>https://pokeapi.co/</a>
@@ -137,11 +142,8 @@ const Home = () => {
                         <img src={pokemon.sprite} style={{width:'100px',height:'100px'}}></img>
                         </>
                     }
-                        // extra={<span>Id: {pokemonId}</span>}
                         style={cardStyle}
                         >
-
-                        {/* <img src={pokemon.sprite} style={{width:'100px',height:'100px'}}></img> */}
                         <p>Habitat: {pokemon.habitat}</p>
                         <p>Capture Rate: {pokemon.captureRate}</p>
                         <p>HP: {pokemon.stats.hp}</p>
@@ -163,7 +165,7 @@ const Home = () => {
                 }
                 </Spin>
             </div>       
-            <div className='center'> <Button type="primary" onClick={info} style={{marginTop:'10px'}}>See a message!</Button> </div>
+            <div className='center'> <Button type="default" onClick={info} style={{margin:'10px'}}><InfoCircleTwoTone />Click Here!</Button> </div>
                       
         </>
     )

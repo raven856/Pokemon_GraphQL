@@ -11,16 +11,6 @@ export const GET_ALL = gql`
     }
 `;
 
-// export const GET_BY_SPECIESID = gql`
-//     query MyQuery {
-//         pokemon_v2_pokemonspeciesname(where: {language_id: {_eq: 8}, pokemon_species_id: {_eq: 1}}) {
-//         id
-//         name
-//         language_id
-//         pokemon_species_id
-//         }
-//     }
-// `;
 export const GET_BY_SPECIESID = gql`
     query MyQuery($id: Int!) {
         pokemon_v2_pokemonspecies(where: {id: {_eq: $id}}) {
@@ -61,24 +51,3 @@ export const GET_BY_SPECIESID = gql`
         }
     }
 `;
-// export const GET_BY_SPECIESID = gql`
-//     query MyQuery($id: Int!) {
-//         pokemon_v2_pokemonspeciesname(where: {language_id: {_eq: 8}, pokemon_species_id: {_eq: $id}}) {
-//         name
-//         pokemon_species_id
-//         }
-//     }
-// `;
-
-// pokemon_v2_pokemonsprites(where: {pokemon_id: {_eq: 1}}) {
-//     id
-//     sprites
-//     pokemon_id
-//   }
-
-// query MyQuery {
-//     pokemon_v2_pokemonhabitat(where: {pokemon_v2_pokemonspecies: {pokemon_v2_pokemonspecies: {pokemon_v2_pokemonspeciesnames: {name: {_eq: "Venusaur"}}}}}) {
-//       name
-//     }
-//   }
-  
