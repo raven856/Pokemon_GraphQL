@@ -66,7 +66,6 @@ const Home = () => {
 
     const handleRandom = () => {
         let rand = (Math.floor(Math.random() * 890) + 1);
-        console.log(rand);
         setPokemonId(rand);
         getPokemonByPId({ variables: { id: rand } });
         
@@ -143,13 +142,19 @@ const Home = () => {
                         </>
                     }
                         style={cardStyle}
-                        >
-                        <p>Habitat: {pokemon.habitat}</p>
-                        <p>Capture Rate: {pokemon.captureRate}</p>
-                        <p>HP: {pokemon.stats.hp}</p>
-                        <p>Attack: {pokemon.stats.attack}</p>
-                        <p>Defense: {pokemon.stats.defense}</p>
-                        <p>Speed: {pokemon.stats.speed}</p>
+                        >         
+                        <span>Habitat: {pokemon.habitat}</span>
+                        <br/>
+                        <span>Capture Rate: {pokemon.captureRate}</span>
+                        <br/>
+                        <span>HP: {pokemon.stats.hp}</span>
+                        <br/>
+                        <span>Attack: {pokemon.stats.attack}</span>
+                        <br/>
+                        <span>Defense: {pokemon.stats.defense}</span>
+                        <br/>
+                        <span>Speed: {pokemon.stats.speed}</span>  
+                                   
                         <p style={{textAlign:'center'}}>Abilities</p>
                         <div>
                             {<>
@@ -165,7 +170,7 @@ const Home = () => {
                 }
                 </Spin>
             </div>       
-            <div className='center'> <Button type="default" onClick={info} style={{margin:'10px'}}><InfoCircleTwoTone />Click Here!</Button> </div>
+            <div className='center'> <Button type="default" size="large" onClick={info} style={{marginBottom:'25px', marginTop:'10px'}}><InfoCircleTwoTone />Click Here!</Button> </div>
                       
         </>
     )
