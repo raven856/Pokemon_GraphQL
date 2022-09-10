@@ -138,7 +138,9 @@ const Home = () => {
                             <>
                         <span >{pokemon.name}</span><span style={{float:'right', fontWeight: 'normal'}}>Id: {pokemonId}</span>
                         <br/>
+                        <div style={{textAlign:'center'}}>
                         <img src={pokemon.sprite} style={{width:'100px',height:'100px'}}></img>
+                        </div>
                         </>
                     }
                         style={cardStyle}
